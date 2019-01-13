@@ -21,9 +21,6 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(BEFORE ${GTEST_INCLUDE_DIRS})
 
-#find_package(GMock REQUIRED)
-#include_directories(BEFORE ${GMOCK_INCLUDE_DIRS})
-
 # Proto file
 get_filename_component(user_service_proto "${CMAKE_CURRENT_SOURCE_DIR}/proto/userservice.proto" ABSOLUTE)
 get_filename_component(user_service_proto_path "${user_service_proto}" PATH)
