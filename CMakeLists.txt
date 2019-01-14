@@ -1,4 +1,4 @@
-#abridged version of https://github.com/grpc/grpc/blob/master/examples/cpp/helloworld/CMakeLists.txt
+#modified version of https://github.com/grpc/grpc/blob/master/examples/cpp/helloworld/CMakeLists.txt
 cmake_minimum_required(VERSION 3.2)
 project(wb-app)
 
