@@ -45,6 +45,6 @@ RUN cmake ../base
 RUN make
 RUN make test
 
+COPY ./test.sh /
 
-EXPOSE 8080
-CMD ["/bin/bash"]
+CMD ["/bin/bash", "/test.sh"]
