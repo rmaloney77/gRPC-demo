@@ -44,8 +44,14 @@ add_custom_command(
 add_executable(userservice "src/server_main.cpp" "src/user_server.cpp" ${user_service_proto_srcs} ${user_service_grpc_srcs})
 target_link_libraries(userservice ${_GRPC_GRPCPP_UNSECURE} ${PROTOBUF_LIBRARIES})
 
+add_executable(userasyncservice "src/server_async_main.cpp" "src/user_server.cpp" ${user_service_proto_srcs} ${user_service_grpc_srcs})
+target_link_libraries(userasyncservice ${_GRPC_GRPCPP_UNSECURE} ${PROTOBUF_LIBRARIES})
+
 add_executable(userclient "src/client_main.cpp" "src/user_client.cpp" ${user_service_proto_srcs} ${user_service_grpc_srcs})
 target_link_libraries(userclient ${_GRPC_GRPCPP_UNSECURE} ${PROTOBUF_LIBRARIES})
+
+add_executable(userasyncclient "src/client_async_main.cpp" "src/user_client.cpp" ${user_service_proto_srcs} ${user_service_grpc_srcs})
+target_link_libraries(userasyncclient ${_GRPC_GRPCPP_UNSECURE} ${PROTOBUF_LIBRARIES})
 
 add_executable(usertest "test/user_service_test.cpp" "src/user_server.cpp" "src/user_client.cpp" ${user_service_proto_srcs} ${user_service_grpc_srcs})
 target_link_libraries(usertest ${_GRPC_GRPCPP_UNSECURE} ${PROTOBUF_LIBRARIES} ${GTEST_BOTH_LIBRARIES} gmock gmock_main)

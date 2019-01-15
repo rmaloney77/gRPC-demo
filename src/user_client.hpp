@@ -14,6 +14,7 @@ public:
 
 public:
     bool UsernameAvailable(const std::string&);
+    bool UsernameAvailableAsync(const std::string&);
     bool CreateUserDetails(game::UserDetails&);
     std::vector<game::GameStatistic> GetGameStatistics(uint32_t user_id, uint32_t game_id); 
 

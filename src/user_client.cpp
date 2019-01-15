@@ -26,6 +26,27 @@ bool UserClient::UsernameAvailable(const std::string &user) {
     return false; 
 }
 
+bool UserClient::UsernameAvailableAsync(const std::string& user) {
+    game::UserDetails request;
+    request.set_username(user);
+    game::UserDetailsResponse resp;
+    grpc::ClientContext context;
+    grpc::CompletionQueue cq;
+    grpc::Status status;
+    std::unique_ptr<grpc::ClientAsyncResponseReaderInterface<game::UserDetailsResponse> > rpc(stub->PrepareAsyncUsernameAvailable(&context, request, &cq));
+    rpc->StartCall();
+    rpc->Finish(&resp, &status, (void*)1);
+    void* got_tag;
+    bool ok = false;
+    GPR_ASSERT(cq.Next(&got_tag, &ok));
+    GPR_ASSERT(got_tag == (void*)1);
+    if (status.ok()) {
+        return resp.result();
+    } 
+    fprintf(stderr, "RPC Failed (%d): %s\n", status.error_code(), status.error_message().c_str());
+    return false; 
+}
+
 bool UserClient::CreateUserDetails(game::UserDetails &ud) {
     game::UserDetails resp;
     grpc::ClientContext context;
