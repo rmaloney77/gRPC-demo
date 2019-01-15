@@ -3,40 +3,53 @@ syntax = "proto3";
 package game;
 
 service User {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+    rpc UsernameAvailable(UserDetails) returns (UserDetailsResponse) {}
+    rpc UsernameValid(UserDetails) returns (UserDetailsResponse) {}
+    rpc EmailValid(UserDetails) returns (UserDetailsResponse) {}
+    rpc CreateUserDetails(UserDetails) returns (UserDetails) {}  
+    rpc GetUserDetails(UserDetails) returns (UserDetails) {}
+    rpc UpdateUserDetails(UserDetails) returns (UserDetails) {}
+    rpc GetStatistics(StatisticsRequest) returns (stream GameStatistic) {}
+}
+
+message UserDetailsResponse {
+    bool result = 1;
 }
 
 message UserDetails {
-//userid
-//username
-//email
+    uint32 id = 1;
+    string username = 2;
+    string email = 3;
 }
 
-message GameStatistics {
-//userid
-//gameid
-//<k,v>
+message StatisticsRequest {
+    uint32 user_id = 1;
+    uint32 game_id = 2;
+}
+
+message GameStatistic {
+    uint32 user_id = 1;
+    uint32 game_id = 2;
+    string name = 3;
+    string value = 4;
+    enum DataType {
+        STR = 0;
+        INT = 1;
+        FLOAT = 2;
+        BOOL = 3;
+    } 
+    DataType type = 5;
 }
 
 message Achievement {
-//userid
-//gameid
-//achievement id
+//user_id
+//game_id
+//desc
+//name
+//resource 
 }
 
 message Match {
-//gameid
-//timestamp
-//usedid[] (participants)
-}
-
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
-}
-
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+//game_id
+//[user_d] (participants)
 }

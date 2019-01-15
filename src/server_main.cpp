@@ -3,8 +3,6 @@
 #include "user_server.hpp"
 
 int main(int argc, char* argv[]) {
-    // Verify that the version of the library that we linked against is
-    // compatible with the version of the headers we compiled against.
     GOOGLE_PROTOBUF_VERIFY_VERSION;
     UserServiceImpl service;
     grpc::ServerBuilder builder;
